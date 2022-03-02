@@ -56,6 +56,24 @@ sudo apt-get install -y nodejs (installing...)
 - You can install using the docs
 - Docker Link: https://docs.docker.com/engine/install/ubuntu/
 - Compose Link: https://docs.docker.com/compose/install/
-
+- Adding docker for the group
+   - sudo groupadd docker
+   - sudo usermod -aG docker $user
 # Install Yarn
 npm install --global yarn
+
+# Copy .env and config orm
+ls -la seeing the hidden files
+cp .env.example .env
+cp ormconfig.example.json ormconfig.json
+
+# Uping only service database
+- sudo docker-compose up -d database
+- sudo docker exec -it database_ignite bash
+
+# Adding ssh key gihub_actions
+- ssh-keygen
+- this time the name is github_actions
+- copy github_actions.pub
+- paste the github_actions.pub in the instance aws in the authorized_keys file.
+- cat >> authorized_keys.
