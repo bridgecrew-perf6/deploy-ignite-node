@@ -77,3 +77,48 @@ cp ormconfig.example.json ormconfig.json
 - copy github_actions.pub
 - paste the github_actions.pub in the instance aws in the authorized_keys file.
 - cat >> authorized_keys.
+
+# Useful links:
+- s3 (Dashboard)
+    - https://s3.console.aws.amazon.com/s3/home?region=sa-east-1
+
+- ec2 (Dashboard)
+    - https://sa-east-1.console.aws.amazon.com/ec2/v2/home?region=sa-east-1#Home:
+
+- This ip instance:
+    - 18.228.224.74
+
+# Habiliting the reverse proxy
+- sudo apt-get install nginx
+- You need to give permission on AWS
+    - You can use this example link: 
+    - https://sa-east-1.console.aws.amazon.com/ec2/v2/home?region=sa-east-1#SecurityGroups:
+- the default nginx folder is /etc/nginx
+- the default nginx file is /etc/nginx/sites-available/default
+- you can create yourself file
+    - cd /etc/nginx/sites-available
+    - sudo touch rentx
+    - sudo vim rentx
+    - content
+       - example .config/server
+- The reverse proxy only accepts one config, you can't create two configs in the same service.
+
+# Symbol link in sites-enable
+- cd /etc/nginx/sites-enabled
+- sudo ln -s /etc/nginx/sites-available/rentx rentx
+- You can remove the default
+   - cd /etc/nginx/sites-available
+   - sudo rm -rf default
+   - cd /etc/nginx/sites-enabled
+   - sudo rm -rf default
+    
+# Configuring the PM2
+- sudo yarn global add pm2
+- pm2 (To test)
+- docs: https://pm2.keymetrics.io/docs/usage/quick-start/
+- pm2 start (To start)
+- cd ~/ && pm2 start app/api-test/src/server.js --name api-test (api-test example)
+- cd ~/ && pm2 start app/api-test/dist/shared/infra/http/server.js --name api-rentx (api rentx example)
+- pm2 status (to status)
+- pm2 stop api-test (To Stop)
+- pm2 start api-test (You can start this way, after you have created already)
